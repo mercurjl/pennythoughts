@@ -1,0 +1,25 @@
+.third_party_sign_in {
+  display: flex;
+  flex-direction: column;
+
+  &.light {
+    color: white;
+  }
+
+  > div {
+    text-align: center;
+  }
+
+  .icon_wrapper {
+    margin-top: 5px;
+  }
+
+  .sign_in_icon {
+    width: 25px;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

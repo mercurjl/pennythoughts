@@ -1,0 +1,53 @@
+@import "../../styles/theme.scss";
+
+.right_menu {
+  display: flex;
+  position: relative;
+  
+
+  .logout {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-bottom: 25px;
+  }
+
+  .menu {
+    position: fixed;
+    width: 300px;
+    background-color: $light-grey;
+    top: 0;
+    right: -386px;
+    padding: 15px 30px 15px 56px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    transition: right 0.5s;
+    transition-timing-function: ease-in-out;
+
+    label {
+      text-align: left;
+    }
+
+    .close {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      padding: 0 3px;
+      cursor: pointer;
+      .close_icon {
+        width: 20px;
+      }
+    }
+  }
+
+  .open {
+    right: 0 !important;
+  }
+
+  .toggle {
+    cursor: pointer;
+  }
+}

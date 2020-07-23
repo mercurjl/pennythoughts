@@ -1,0 +1,11 @@
+@import '../../styles/theme.scss';
+
+.sign_up {
+  display: flex;
+  flex: 1;
+  max-width: 400px;
+
+  h1 {
+    text-align: center;
+  }
+}

@@ -1,0 +1,37 @@
+.post_card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 350px;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 320px 20px 30px 20px;
+  -webkit-box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.15);
+
+  h1 {
+    margin: 0;
+  }
+
+  .post_card_img {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .author {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
