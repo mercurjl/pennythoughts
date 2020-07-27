@@ -38,8 +38,10 @@ export const handleSignGoogleIn = () => {
               .then(res => {
                 toast.notify(`Account created!`, { type: "success" })
               })
+              .catch(e => console.log(e))
           }
         })
+        .catch(e => console.log(e))
     })
     .catch(error => {
       if (error.code !== "auth/popup-closed-by-user") {

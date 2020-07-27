@@ -42,6 +42,7 @@ export async function getStaticProps() {
         return {...question.data(), id: question.id}
       })
     })
+    .catch(e => console.log(e))
 
   return {
     props: {

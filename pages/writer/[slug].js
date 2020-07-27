@@ -41,6 +41,7 @@ export async function getStaticProps({ params }) {
     .doc(params.slug)
     .get()
     .then(writerSnapshot => writer = writerSnapshot.data())
+    .catch(e => console.log(e))
 
   return { props: {...writer} }
 }
