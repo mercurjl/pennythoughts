@@ -1,8 +1,14 @@
 .quiz {
+  padding: 30px 60px;
   .question_wrapper {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     text-align: center;
+
+    button {
+      max-width: 200px;
+      margin: 10px auto;
+    }
   }
 }

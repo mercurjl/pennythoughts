@@ -1,5 +1,14 @@
+@import '../styles/theme.scss';
+
 .become_a_writer {
   p {
     max-width: 600px;
+  }
+
+  .header{
+    padding: 30px 60px;
+    background-color: $decyan;
+    color: white;
+
   }
 }

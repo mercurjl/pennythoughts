@@ -9,21 +9,22 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 const Quiz = ({ data }) => {
   const [answeredQuestions, setAnsweredQuestions] = useState([])
   const [selectedQuestion, setSelectedQuestion] = useState('none')
+  const [questionData, setQuestionData] = useState('')
 
   const getQuestionBody = () => {
-    console.log(selectedQuestion)
     if (selectedQuestion !== 'none') {
       let question = data.find(question => question.id === selectedQuestion)
       switch (question.answerType) {
         case 'short_answer':
-          return <ShortAnswer question={question} />
-          break;
+          return <ShortAnswer question={question} questionData={questionData} setQuestionData={setQuestionData}/>
         default:
           break;
       }
-
     }
+  }
 
+  const handleAddAnswer = () => {
+    console.log('click')
   }
 
   return (
@@ -40,7 +41,12 @@ const Quiz = ({ data }) => {
       {selectedQuestion !== 'none' ?
         <div className={styles.question_wrapper}>
           {getQuestionBody()}
-          <button className='primary'>add to your profile</button>
+          <button
+            className='primary'
+            onClick={() => handleAddAnswer()}
+          >
+            add to your profile
+          </button>
         </div> : null
       }
 
@@ -51,13 +57,16 @@ const Quiz = ({ data }) => {
 
 export default Quiz
 
-
-const ShortAnswer = ({ question }) => {
-
+const ShortAnswer = ({ question, questionData, setQuestionData }) => {
   return (
     <Fragment>
       <h2>{question.title}</h2>
-      <textarea name="" id="" cols="30" rows="10"></textarea>
+      <textarea 
+      cols="30" 
+      rows="10"
+      value={questionData}
+      onChange={e => setQuestionData(e.target.value)}
+      />
     </Fragment>
   )
 }
