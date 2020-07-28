@@ -7,10 +7,17 @@ import { AppContext } from '../../providers/app-provider'
 import ThirdPartySignIn from '../authentication/third-party-sign-in'
 import SignInEmail from '../authentication/sign-in-email'
 import Profile from './profile'
+import { useRouter } from 'next/router'
 
 const RightMenu = () => {
   const { isAuthed, authLoading } = useContext(AppContext)
   const [showMenu, setShowMenu] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    setShowMenu(false)
+  }, [router.pathname])
+
 
   return (
     <div className={styles.right_menu}>
@@ -24,11 +31,11 @@ const RightMenu = () => {
             <SignInEmail />
             <ThirdPartySignIn style="dark" text="sign in other ways" />
           </React.Fragment>
-          : 
+          :
           <React.Fragment>
             <Profile />
           </React.Fragment>
-          }
+        }
 
         <div className={styles.logout}>
           {!authLoading && isAuthed ? <button onClick={() => handleSignOut()}>logout</button> : null}

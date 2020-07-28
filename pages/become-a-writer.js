@@ -40,10 +40,21 @@ export async function getStaticProps() {
     .doc('writer-quiz')
     .collection('questions')
     .get()
-    .then(querySnapshot => {
-      quizData = querySnapshot.docs.map(question => {
-        return { ...question.data(), id: question.id }
-      })
+    .then(quizQuestionSnapshot => {
+      firebase.firestore().collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .collection('quizAnswers')
+        .get()
+        .then(userAnswersSnapshot => {
+          
+          userAnswers = userAnswersSnapshot.map(answers => answers.data())
+          quizData = quizQuestionSnapshot.docs.map(question => {
+            return { ...question.data(), id: question.id }
+          })
+
+          console.log(userAnswers)
+          console.log(quizData)
+        })
     })
     .catch(e => console.log(e))
 
