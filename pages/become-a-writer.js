@@ -1,15 +1,16 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment } from 'react'
 import { firebase } from '../firebase'
 import { AppContext } from '../providers/app-provider'
 import styles from './become-a-writer.module.scss'
-import Quiz from '../components/quiz';
+import Quiz from '../components/quiz'
+
 
 const Dashboard = ({ quizData }) => {
-  const { currentUser, authLoading } = useContext(AppContext)
+  const { currentUser, authLoading, isAuthed } = useContext(AppContext)
   return (
     <div className={`${styles.become_a_writer}`}>
       {!authLoading ? <div>
-        {currentUser && currentUser.canBecomeWriter ?
+        {currentUser && isAuthed && currentUser.canBecomeWriter ?
           <Fragment>
             <div className={`${styles.header}`}>
               <h1>become a writer</h1>
@@ -41,20 +42,9 @@ export async function getStaticProps() {
     .collection('questions')
     .get()
     .then(quizQuestionSnapshot => {
-      firebase.firestore().collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .collection('quizAnswers')
-        .get()
-        .then(userAnswersSnapshot => {
-          
-          userAnswers = userAnswersSnapshot.map(answers => answers.data())
-          quizData = quizQuestionSnapshot.docs.map(question => {
-            return { ...question.data(), id: question.id }
-          })
-
-          console.log(userAnswers)
-          console.log(quizData)
-        })
+      quizData = quizQuestionSnapshot.docs.map(question => {
+        return { ...question.data(), id: question.id }
+      })
     })
     .catch(e => console.log(e))
 
