@@ -5,7 +5,6 @@ export const handleSignGoogleIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider)
     .then(res => {
-      console.log(res)
       firebase.firestore().collection('users')
         .doc(res.user.uid)
         .get()

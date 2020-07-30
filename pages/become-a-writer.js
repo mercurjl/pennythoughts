@@ -9,8 +9,8 @@ const Dashboard = ({ quizData }) => {
   const { currentUser, authLoading, isAuthed } = useContext(AppContext)
   return (
     <div className={`${styles.become_a_writer}`}>
-      {!authLoading ? <div>
-        {currentUser && isAuthed && currentUser.canBecomeWriter ?
+      {!authLoading && currentUser ? <div>
+        {currentUser.canBecomeWriter ?
           <Fragment>
             <div className={`${styles.header}`}>
               <h1>become a writer</h1>
@@ -25,8 +25,8 @@ const Dashboard = ({ quizData }) => {
           </div>
         }
       </div> :
-        <div>
-          loading
+      <div>
+        loading
       </div>
       }
     </div>

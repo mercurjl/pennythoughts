@@ -27,32 +27,16 @@ const AppProvider = ({ children }) => {
       firebase.firestore()
         .collection('users')
         .doc('5XbCZSdqLVf4x15KbudlYAvDwSp1')
-        .onSnapshot({
-          // Listen for document metadata changes
-          includeMetadataChanges: true
-        }, userSnapshot => {
-          console.log('userSnapshot changed')
+        .onSnapshot(userSnapshot => {
           firebase.firestore().collection('users')
             .doc(auth.currentUser.uid)
             .collection('quizAnswers')
             .onSnapshot(qa => {
-              console.log('qa snapshot changed')
               let quizAnswers = []
               qa.forEach(answers => quizAnswers.push(answers.data()))
               setCurrentUser({ ...userSnapshot.data(), quizAnswers: quizAnswers })
             })
         })
-
-      // firebase.firestore()
-      //   .collection('users')
-      //   .doc('5XbCZSdqLVf4x15KbudlYAvDwSp1')
-      //   .collection('quizAnswers')
-      //   .onSnapshot(qaSnapshot => {
-      //     console.log('qa snapshot changed')
-      //     let quizAnswers = []
-      //     qaSnapshot.forEach(answers => quizAnswers.push(answers.data()))
-      //     setCurrentUser({ ...currentUser, quizAnswers: quizAnswers })
-      //   })
     }
   }, [isAuthed])
 

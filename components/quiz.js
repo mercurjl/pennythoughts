@@ -18,7 +18,7 @@ const Quiz = ({ data }) => {
   useEffect(() => {
     console.log("set unanswered")
     setUnansweredQuestions(_.differenceBy(data, currentUser.quizAnswers, 'id'))
-    
+
   }, [data, currentUser])
 
   const getQuestionBody = () => {
@@ -33,13 +33,13 @@ const Quiz = ({ data }) => {
   }
 
   const handleAddAnswer = () => {
+    setSelectedQuestion(null)
+    setQuestionData('')
     firebase.firestore().collection('users')
       .doc(firebase.auth().currentUser.uid)
       .collection('quizAnswers')
       .add({ ...selectedQuestion, answer: questionData })
       .then(res => {
-        setSelectedQuestion(null)
-        setQuestionData('')
         toast.notify(`Answer Added!`, { type: "success" })
       })
       .catch(e => {
@@ -52,10 +52,10 @@ const Quiz = ({ data }) => {
       <h2>answer some questions so readers can get to know you:</h2>
       <select
         onChange={e => e.target.value !== null ? setSelectedQuestion(unansweredQuestions.find(question => question.id === (e.target.value))) : setSelectedQuestion(null)}
+        value={selectedQuestion}
       >
         <option
           value={null}
-          selected={selectedQuestion === null}
         >
           Select One
         </option>
