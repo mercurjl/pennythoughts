@@ -17,9 +17,8 @@ const Quiz = ({ data }) => {
 
   useEffect(() => {
     console.log("set unanswered")
-    
     setUnansweredQuestions(_.differenceBy(data, currentUser.quizAnswers, 'id'))
-    setSelectedQuestion(null)
+    
   }, [data, currentUser])
 
   const getQuestionBody = () => {
@@ -39,6 +38,8 @@ const Quiz = ({ data }) => {
       .collection('quizAnswers')
       .add({ ...selectedQuestion, answer: questionData })
       .then(res => {
+        setSelectedQuestion(null)
+        setQuestionData('')
         toast.notify(`Answer Added!`, { type: "success" })
       })
       .catch(e => {
@@ -49,8 +50,15 @@ const Quiz = ({ data }) => {
   return (
     <div className={styles.quiz}>
       <h2>answer some questions so readers can get to know you:</h2>
-      <select onChange={e => e.target.value !== null ? setSelectedQuestion(unansweredQuestions.find(question => question.id === (e.target.value))) : setSelectedQuestion(null)}>
-        <option value={null}>Select One</option>
+      <select
+        onChange={e => e.target.value !== null ? setSelectedQuestion(unansweredQuestions.find(question => question.id === (e.target.value))) : setSelectedQuestion(null)}
+      >
+        <option
+          value={null}
+          selected={selectedQuestion === null}
+        >
+          Select One
+        </option>
         {unansweredQuestions.map((question, index) => {
           return (
             <option value={question.id} key={index}>{question.title}</option>
